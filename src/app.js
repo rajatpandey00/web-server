@@ -40,6 +40,12 @@ app.get('/about', (req, res) => {
     })
 })
 
+app.get('/help/*', (req, res) => {
+    res.render('error-page', {
+        title: 'Error',
+    })
+})
+
 app.listen(3000, () => {
     console.log('Server running!!!!')
 })
