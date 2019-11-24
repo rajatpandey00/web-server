@@ -1,3 +1,27 @@
- h1 {
+ .title {
    color: red;
+   text-align: center;
+   font-weight: bolder;
+}
+
+.links {
+  float: right;
+}
+
+body {
+  padding-top: 50px;
+}
+
+.footer {
+text-align: end;
+}
+
+.view-body {
+ background-image: url('../image/earth.gif');
+ background-color: rgb(221, 227, 230);
+}
+
+#googleMap {
+  width: 100%;
+  height: 50%;
 }

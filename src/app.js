@@ -2,6 +2,8 @@ const express = require('express')
 const path = require('path')
 const app = express()
 const hbs = require('hbs')
+const geoCode = require('../apis/geocode')
+const weatherDetails = require('../apis/weatherDetails')
 
 const publicDir = path.join(__dirname, '../public') //path join takes two arguments
 const partialsSubPath = path.join(__dirname, '../partials')
@@ -16,21 +18,30 @@ hbs.registerPartials(partialsSubPath)
 app.get('', (req, res) => {
     res.render('index', {
         createdBy: 'Rajat Pandey',
-        title : 'Weather-App'
+        title: 'Weather-App'
     })
 })
 
 app.get('/help', (req, res) => {
     res.render('help-page', {
-       title: 'Help Page'
+        title: 'Help Page'
     })
 })
 
 app.get('/weather', (req, res) => {
-    res.send({
-        forecast: 'Cloudy with 50 degree temperature',
-        location: 'Texas'
-    })
+    const address = req.query.location
+    if(address){
+        geoCode(address, (error, { latitude, longitude }) => {
+            if (error === null) {
+              weatherDetails(latitude, longitude, ({ icon, temperature }) => {
+                const information = `The weather in ${address} will be, ${icon} with around ${temperature} of temperature`
+                res.send({ info: information })
+              })
+            } else {
+              console.log(error)
+            }
+          })
+    }
 })
 
 app.get('/about', (req, res) => {
