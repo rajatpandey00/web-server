@@ -1,14 +1,29 @@
 const express = require('express')
 const path = require('path')
-
 const app = express()
-const helpPage = path.join(__dirname, './pages/help-page.html') //path join takes two arguments
-app.get('/help', (req, res) => {
-    res.sendFile(helpPage) // For sending file in response 
+const hbs = require('hbs')
+
+const publicDir = path.join(__dirname, '../public') //path join takes two arguments
+const partialsSubPath = path.join(__dirname, '../partials')
+
+app.set('view engine', 'hbs')
+app.use(express.static(publicDir))
+hbs.registerPartials(partialsSubPath)
+
+// app.get('', (req, res) => {
+//     res.sendFile(`${publicDir}/pages/index.html`) // For sending file in response 
+// })
+app.get('', (req, res) => {
+    res.render('index', {
+        createdBy: 'Rajat Pandey',
+        title : 'Weather-App'
+    })
 })
 
-app.get('', (req, res) => { // app.get('', (res, req) => {})
-    res.send('Hello Express!!')
+app.get('/help', (req, res) => {
+    res.render('help-page', {
+       title: 'Help Page'
+    })
 })
 
 app.get('/weather', (req, res) => {
@@ -19,9 +34,9 @@ app.get('/weather', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-    res.send({
-        name: 'Rajat',
-        designation: 'Full Stack Engineer'
+    res.render('about', {
+        title: 'About Me',
+        creator: 'Rajat Pandey'
     })
 })
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Sample Index Page</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <script src="../js/dummy.js"></script>
+    <script src="../js/map-index.js"></script>
+</head>
+
+<body>
+    {{>headers}}
+    <div id="googleMap" style="width:50%;height:200px;"></div>
+    <p>Click the button to get your coordinates.</p>
+
+    <button onclick="getLocation()">Try Me</button>
+
+    <p id="demo"></p>
+
+    <script>
+    </script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDG9O1Ug4-usnvE12Xmoqs7lIKfx9cAlck&callback=myMap"></script>
+    <h2>Created By {{createdBy}}</h2>
+
+</body>
+
+</html>
