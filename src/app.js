@@ -31,14 +31,14 @@ app.get('/help', (req, res) => {
 app.get('/weather', (req, res) => {
     const address = req.query.location
     if(address){
-        geoCode(address, (error, { latitude, longitude }) => {
+        geoCode(address, (error, { latitude, longitude } = {}) => {
             if (error === null) {
               weatherDetails(latitude, longitude, ({ icon, temperature }) => {
                 const information = `The weather in ${address} will be, ${icon} with around ${temperature} of temperature`
-                res.send({ info: information })
+                res.send({ forecast: information, address })
               })
             } else {
-              console.log(error)
+                res.send({ error })
             }
           })
     }

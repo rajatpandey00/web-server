@@ -2,25 +2,21 @@
 <html lang="en">
 
 <head>
-    <title>Sample Index Page</title>
-    <link rel="stylesheet" href="../styles/styles.css">
-    <script src="../js/dummy.js"></script>
-    <script src="../js/map-index.js"></script>
+    <title>Search Weather</title>
+    <link rel="stylesheet" href="/styles/styles.css">
 </head>
 
-<body class="view-body">
-    {{>headers}}
-    <div id="googleMap" style="width:50%;height:400px;margin:100px"></div>
-    <p style="color: white">Click the button to get your coordinates.</p>
-
-    <button onclick="getLocation()">Try Me</button>
-
-    <p id="demo"></p>
-    <script
-       ></script>
-    <h2>Created By {{createdBy}}</h2>
-
+<body>
+    <div class="main-content">
+        {{>headers}}
+        <form class="search-form">
+            <input type="text">
+            <button type="submit">Find Weather</button>
+        </form>
+        <p id="message"></p>
+    </div>
+    {{>footer}}
+    <script src="../js/client-app.js"></script>
 </body>
-<footer>{{>footer}}</footer>
 
 </html>
